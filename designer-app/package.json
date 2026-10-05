@@ -1,0 +1,25 @@
+{
+  "name": "low-code-designer-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "tsx --test src/schema/schema-builder.test.ts src/schema/schema-layout.test.ts src/schema/schema-grid.test.ts src/store/designer-model.test.ts src/store/designer-container.test.ts src/store/designer-grid.test.ts src/tree/schema-tree-model.test.ts src/rule-designer/tests/rule-model.test.ts src/rule-designer/tests/rule-builder.test.ts src/permission-designer/tests/permission-model.test.ts src/permission-designer/tests/permission-builder.test.ts"
+  },
+  "dependencies": {
+    "element-plus": "^2.8.8",
+    "@element-plus/icons-vue": "^2.3.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vue-tsc": "^2.2.0"
+  }
+}
