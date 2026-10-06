@@ -16,6 +16,8 @@ import type { FormBundle } from '../../../config-server/types'
  * 本插件把 config-server 单例挂在**本 Vite 进程（5174）**上，
  * 以一小撮 REST 风格路由暴露：
  *
+ *   GET  /__config/forms
+ *   GET  /__config/forms/:formId/version-details
  *   GET  /__config/forms/:formId/versions
  *   PUT  /__config/forms/:formId/draft-auto
  *   PUT  /__config/forms/:formId/versions/:version/draft
@@ -65,6 +67,7 @@ export function configGatewayPlugin(): Plugin {
 
           void route(req, res, {
             method: req.method ?? 'GET',
+            segments,
             formId,
             actionPath,
             forms,
@@ -78,6 +81,7 @@ export function configGatewayPlugin(): Plugin {
 
 interface RouteDeps {
   method: string
+  segments: string[]
   formId: string
   actionPath: string[]
   forms: FormService
@@ -89,9 +93,21 @@ async function route(
   res: ServerResponse,
   deps: RouteDeps,
 ): Promise<void> {
-  const { method, formId, actionPath, forms, publish } = deps
+  const { method, segments, formId, actionPath, forms, publish } = deps
 
   try {
+    /* GET /__config/forms */
+    if (method === 'GET' && segments.length === 2 && segments[1] === 'forms') {
+      sendJson(res, 200, forms.listFormIds())
+      return
+    }
+
+    /* GET version-details */
+    if (method === 'GET' && actionPath[0] === 'version-details' && actionPath.length === 1) {
+      sendJson(res, 200, forms.listVersionDetails(formId))
+      return
+    }
+
     /* GET versions */
     if (method === 'GET' && actionPath[0] === 'versions' && actionPath.length === 1) {
       sendJson(res, 200, forms.listVersions(formId))

@@ -53,6 +53,15 @@ export interface FormDefinition extends FormBundle {
   formId: string
   version: number
   status: DefinitionStatus
+  /** ISO-8601；草稿保存 / 发布时各自更新，不跨状态共享引用 */
+  updatedAt: string
+}
+
+/** 版本清单元数据（含 draft / published 状态，供配置管理页展示） */
+export interface FormVersionDetail {
+  version: number
+  status: DefinitionStatus
+  updatedAt: string
 }
 
 /* ─────────────────────── 网关接口（面向未来真实 API） ─────────────────────── */
@@ -76,6 +85,8 @@ export interface ConfigGateway {
   loadFormDefinition(formId: string, version: number): FormDefinition
   loadLatestPublishedFormDefinition(formId: string): FormDefinition
   listVersions(formId: string): number[]
+  listFormIds(): string[]
+  listVersionDetails(formId: string): FormVersionDetail[]
 }
 
 /** 查询不到目标配置时抛出的错误（消费方可显式识别 404 语义） */

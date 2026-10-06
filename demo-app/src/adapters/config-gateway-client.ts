@@ -1,4 +1,7 @@
-import type { FormDefinition } from '../../../config-server/types'
+import type {
+  FormDefinition,
+  FormVersionDetail,
+} from '../../../config-server/types'
 
 /**
  * Runtime 配置加载客户端（应用侧适配器）
@@ -7,7 +10,9 @@ import type { FormDefinition } from '../../../config-server/types'
  *
  *   loadFormDefinition(formId)           → 最新已发布版本
  *   loadFormDefinition(formId, version)  → 指定已发布版本
- *   listVersions(formId)                 → 版本清单
+ *   listForms()                          → 仓储内 formId 清单
+ *   listVersions(formId)                 → 版本号清单
+ *   listVersionDetails(formId)           → 版本 status / updatedAt
  *
  * 本 client 只能读到 published：网关不提供 draft 读取路由，
  * 也不存在本地 json / localStorage 兜底。
@@ -52,9 +57,19 @@ export const runtimeConfigClient = {
     return request<FormDefinition>(path)
   },
 
+  listForms(): Promise<string[]> {
+    return request<string[]>('/forms')
+  },
+
   listVersions(formId: string): Promise<number[]> {
     return request<number[]>(
       `/forms/${encodeURIComponent(formId)}/versions`,
+    )
+  },
+
+  listVersionDetails(formId: string): Promise<FormVersionDetail[]> {
+    return request<FormVersionDetail[]>(
+      `/forms/${encodeURIComponent(formId)}/version-details`,
     )
   },
 }

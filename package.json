@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "tsx src/main.ts",
-    "test": "tsx --test src/dependency/dependency-graph.test.ts src/scheduler/rule-scheduler.test.ts src/runtime/oa-runtime.test.ts src/state-resolution/field-state-resolver.test.ts src/schema-version/tests/schema-version.test.ts src/migration/tests/migration.test.ts src/migration/execution/tests/migration-executor.test.ts src/subform/subform-core.test.ts config-server/tests/config-store.test.ts config-server/tests/form-service.test.ts config-server/tests/publish-service.test.ts config-server/tests/validation.test.ts"
+    "test": "tsx --test src/dependency/dependency-graph.test.ts src/scheduler/rule-scheduler.test.ts src/runtime/oa-runtime.test.ts src/state-resolution/field-state-resolver.test.ts src/schema-version/tests/schema-version.test.ts src/migration/tests/migration.test.ts src/migration/execution/tests/migration-executor.test.ts src/subform/subform-core.test.ts config-server/tests/config-store.test.ts config-server/tests/form-service.test.ts config-server/tests/form-metadata.test.ts config-server/tests/publish-service.test.ts config-server/tests/runtime-config-client.test.ts config-server/tests/validation.test.ts demo-app/src/pages/schema-shared.test.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.4",

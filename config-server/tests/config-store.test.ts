@@ -29,7 +29,13 @@ function makeDefinition(
   status: 'draft' | 'published',
   label = '报销金额',
 ): FormDefinition {
-  return { formId, version, status, ...makeBundle(label) }
+  return {
+    formId,
+    version,
+    status,
+    updatedAt: '2020-01-01T00:00:00.000Z',
+    ...makeBundle(label),
+  }
 }
 
 describe('ConfigStore · 保存与读取', () => {
@@ -82,6 +88,25 @@ describe('ConfigStore · Draft / Published 读取隔离', () => {
     store.save(makeDefinition('g', 2, 'published'))
     assert.ok(store.getPublished('g', 2))
     assert.equal(store.getDraft('g', 2), undefined)
+  })
+})
+
+describe('ConfigStore · listFormIds / listVersionDetails', () => {
+  it('listFormIds 来自仓储 key，空则 []', () => {
+    const store = new ConfigStore()
+    assert.deepEqual(store.listFormIds(), [])
+    store.save(makeDefinition('purchase-order', 1, 'draft'))
+    assert.deepEqual(store.listFormIds(), ['purchase-order'])
+  })
+
+  it('listVersionDetails 含 status / updatedAt', () => {
+    const store = new ConfigStore()
+    store.save(makeDefinition('purchase-order', 1, 'published'))
+    const details = store.listVersionDetails('purchase-order')
+    assert.equal(details.length, 1)
+    assert.equal(details[0].version, 1)
+    assert.equal(details[0].status, 'published')
+    assert.equal(details[0].updatedAt, '2020-01-01T00:00:00.000Z')
   })
 })
 

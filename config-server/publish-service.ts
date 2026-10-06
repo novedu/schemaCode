@@ -57,6 +57,10 @@ export class PublishService {
 
     // 同一 key 上 draft → published：ConfigStore 允许"覆盖草稿"，
     // 但此后该 key 即被锁定，任何 save 都会被拒绝。
-    return this.store.save({ ...draft, status: 'published' })
+    return this.store.save({
+      ...draft,
+      status: 'published',
+      updatedAt: new Date().toISOString(),
+    })
   }
 }

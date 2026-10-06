@@ -1,4 +1,4 @@
-import type { FormDefinition } from './types'
+import type { FormDefinition, FormVersionDetail } from './types'
 
 /**
  * ConfigStore（内存配置仓储）
@@ -72,6 +72,29 @@ export class ConfigStore {
   getPublished(formId: string, version: number): FormDefinition | undefined {
     const value = this.get(formId, version)
     return value?.status === 'published' ? value : undefined
+  }
+
+  /** 仓储内全部 formId（升序） */
+  listFormIds(): string[] {
+    const ids = new Set<string>()
+    for (const key of this.definitions.keys()) {
+      const at = key.indexOf('@v')
+      if (at <= 0) continue
+      ids.add(key.slice(0, at))
+    }
+    return [...ids].sort((a, b) => a.localeCompare(b))
+  }
+
+  /** 某表单各版本元数据（升序 version） */
+  listVersionDetails(formId: string): FormVersionDetail[] {
+    return this.listVersions(formId).map((version) => {
+      const def = this.definitions.get(definitionKey(formId, version))!
+      return {
+        version,
+        status: def.status,
+        updatedAt: def.updatedAt,
+      }
+    })
   }
 
   /** 某表单的全部版本号（升序） */

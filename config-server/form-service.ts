@@ -1,5 +1,9 @@
 import type { ConfigStore } from './config-store'
-import type { FormBundle, FormDefinition } from './types'
+import type { FormBundle, FormDefinition, FormVersionDetail } from './types'
+
+function nowIso(): string {
+  return new Date().toISOString()
+}
 
 /**
  * FormService（表单配置生命周期服务 · 基础操作）
@@ -24,6 +28,7 @@ export class FormService {
       formId,
       version,
       status: 'draft',
+      updatedAt: nowIso(),
       ...bundle,
     })
   }
@@ -72,5 +77,15 @@ export class FormService {
   /** 版本清单（升序） */
   listVersions(formId: string): number[] {
     return this.store.listVersions(formId)
+  }
+
+  /** 仓储中实际存在的 formId（升序） */
+  listFormIds(): string[] {
+    return this.store.listFormIds()
+  }
+
+  /** 各版本的 status / updatedAt（升序 version） */
+  listVersionDetails(formId: string): FormVersionDetail[] {
+    return this.store.listVersionDetails(formId)
   }
 }
