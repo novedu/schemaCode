@@ -1,5 +1,17 @@
 # mini-form-engine
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Vue](https://img.shields.io/badge/Vue-3-42b883)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)
+![Tests](https://img.shields.io/badge/tests-26%20files-success)
+
+> **仓库名** `schemaCode` ｜ **包名** `mini-form-engine` ｜ 面向 **ERP / OA** 等企业表单密集场景。
+>
+> ⚠️ **本项目与 AI 无关** —— 它是企业软件架构能力项目，展示 Schema 驱动的运行时设计。
+> 作者另有 AI 应用方向的项目：[agent-studio](https://github.com/novedu/agent-studio) ·
+> [spark-workshop](https://github.com/novedu/spark-workshop) ·
+> [enterprise-admin-kit](https://github.com/novedu/enterprise-admin-kit)。
+
 > Schema 驱动的低代码表单引擎：把「表单长什么样」全部交给 Schema 描述，
 > 把「字段此刻能不能编辑、该显示什么」交给一个多来源的状态决策引擎。
 
@@ -132,6 +144,8 @@ Schema ─▶ ComponentMap ─▶ Renderer(buildRenderConfigs)
 ```
 
 ## Demo 应用演示了什么
+
+<!-- TODO: 建议录制 GIF —— 「审批中心切换节点 + 右侧 FieldState Inspector 显示状态来自哪个 Provider」最有技术说服力 -->
 
 | 页面 | 演示内容 |
 |---|---|
