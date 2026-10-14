@@ -7,7 +7,7 @@
 
 > **仓库名** `schemaCode` ｜ **包名** `mini-form-engine` ｜ 面向 **ERP / OA** 等企业表单密集场景。
 >
-> ⚠️ **本项目与 AI 无关** —— 它是企业软件架构能力项目，展示 Schema 驱动的运行时设计。
+> 本项目是企业软件架构项目，展示 Schema 驱动的运行时设计（与 AI 无关）。
 > 作者另有 AI 应用方向的项目：[agent-studio](https://github.com/novedu/agent-studio) ·
 > [spark-workshop](https://github.com/novedu/spark-workshop) ·
 > [enterprise-admin-kit](https://github.com/novedu/enterprise-admin-kit)。
@@ -194,7 +194,7 @@ npm test          # 一次跑完引擎 + 配置服务 + 演示应用的全部单
 ## 当前状态
 
 引擎核心、设计器、配置服务与演示应用已形成闭环。
-尚未接入 CI 流水线，也未添加 LICENSE。
+尚未接入 CI 流水线。
 
 ## 许可证
 
